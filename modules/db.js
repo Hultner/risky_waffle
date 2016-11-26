@@ -2,13 +2,19 @@ var exports = {};
 
 var fs = require('fs');
 
+/**
+ * Returns the data from db.json
+ */
 exports.read = function() {
   var data = fs.readFileSync('../db/db.json', 'utf-8');
   return data;
 };
 
-exports.write = function(newValue) {
-  fs.writeFileSync('../db/db.json', newValue, 'utf-8');
+/**
+ * Writes data from db.json
+ */
+exports.write = function(dbData) {
+  fs.writeFileSync('../db/db.json', dbData, 'utf-8');
 };
 
 module.exports = exports;
