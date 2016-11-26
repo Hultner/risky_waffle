@@ -1,9 +1,14 @@
 var NO_LOCATION = 'ANTARCTICA';
 var gotUserLocationCallback = function(location) {}; // Empty callback
+var cachedLocation = undefined;
 
 function getUserLocation(callback) {
-	gotUserLocationCallback = callback;
-	initiate_geolocation();
+	if(cachedLocation != undefined) {
+		callback(cachedLocation);
+	} else {
+		gotUserLocationCallback = callback;
+		initiate_geolocation();
+	}
 }
 
 function initiate_geolocation() {
@@ -43,5 +48,6 @@ function handle_geolocation_query(position) {
 }
 
 function setLocation(place) {
+	cachedLocation = place;
 	gotUserLocationCallback(place);
 }
