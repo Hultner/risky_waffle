@@ -6,6 +6,7 @@ var peer = new Peer({ key: 'rjts7l1c07rs5rk9', debug: 3});
 
 peer.on('open', function(){
   $('#my-id').text(peer.id);
+  readyPeer(peer.id);
 });
 
 // Receiving a call
@@ -77,4 +78,99 @@ function step3 (call) {
   call.on('close', step2);
   $('#step1, #step2').hide();
   $('#step3').show();
+}
+
+function call (id){}
+
+function readyPeer(uuid){
+
+
+  findBusStop(function(response){
+      if(response.uuid && response.uuid.length < 25){
+          console.log('trying to start a connection');
+          console.log(response, response.uuid);
+          call(response.uuid);
+          console.log(response.uuid);
+          /*console.log(response.data);
+          // Start connection
+          peerConnection = new RTCPeerConnection(peerConnectionConfig);
+          peerConnection.onaddstream = gotRemoteStream;
+          peerConnection.addStream(localStream);
+          peerConnection.setRemoteDescription(new RTCSessionDescription(response.sdp)).then(function(){
+              if(signal.sdp.type == 'offer') {
+                  peerConnection.createAnswer().then(createdDescription).catch(errorHandler);
+              }
+          }).catch(errorHandler);
+
+          for(var i = 0; i<response.data.length; i++){
+              peerConnection.addIceCandidate(new RTCIceCandidate(response.data[i])).catch(errorHandler);
+          }*/
+      }else{
+          console.log('waiting for a connection.....');
+          /*peerConnection = new RTCPeerConnection(peerConnectionConfig);
+          peerConnection.onicecandidate = gotIceCandidate;
+          peerConnection.onaddstream = gotRemoteStream;
+          peerConnection.addStream(localStream);
+          peerConnection.createOffer().then(createdDescription).catch(errorHandler);*/
+
+          getUserLocation(function(loc){
+            nodeLocation = loc;
+            registerForVideo(uuid, loc, {'test':true}, {'test':true});
+
+          });
+
+          //setTimeout(function(){registerForVideo(uuid, nodeLocation, sdp, iceCandidates);}, 500);
+      }
+  });
+}
+
+function pageReady() {
+    uuid = uuid();
+
+    localVideo = document.getElementById('localVideo');
+    remoteVideo = document.getElementById('remoteVideo');
+
+    var constraints = {
+        video: true,
+        audio: false
+    };
+
+    if(navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia(constraints).then(getUserMediaSuccess).catch(errorHandler);
+    } else {
+        alert('Your browser does not support getUserMedia API');
+    }
+
+    findBusStop(function(response){
+        console.log(response);
+        if(response.uuid && response.sdp && response.data){
+            console.log('trying to start a connection');
+            console.log(response.sdp);
+            console.log(response.data);
+            // Start connection
+            peerConnection = new RTCPeerConnection(peerConnectionConfig);
+            peerConnection.onaddstream = gotRemoteStream;
+            peerConnection.addStream(localStream);
+            peerConnection.setRemoteDescription(new RTCSessionDescription(response.sdp)).then(function(){
+                if(signal.sdp.type == 'offer') {
+                    peerConnection.createAnswer().then(createdDescription).catch(errorHandler);
+                }
+            }).catch(errorHandler);
+
+            for(var i = 0; i<response.data.length; i++){
+                peerConnection.addIceCandidate(new RTCIceCandidate(response.data[i])).catch(errorHandler);
+            }
+        }else{
+            console.log('waiting for a connection.....');
+            peerConnection = new RTCPeerConnection(peerConnectionConfig);
+            peerConnection.onicecandidate = gotIceCandidate;
+            peerConnection.onaddstream = gotRemoteStream;
+            peerConnection.addStream(localStream);
+            peerConnection.createOffer().then(createdDescription).catch(errorHandler);
+
+            getUserLocation(function(loc){nodeLocation = loc;});
+
+            setTimeout(function(){registerForVideo(uuid, nodeLocation, sdp, iceCandidates);}, 500);
+        }
+    });
 }
