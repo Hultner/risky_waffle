@@ -11,7 +11,7 @@ exports.addBusStop = function(uuid, city, responseFunction) {
 		var ok = db.addBusStop(busStop);
 		
 		if(ok) {
-			responseFunction(undefined, uuid +' @ ' + city + ' added');
+			responseFunction(undefined, busStop);
 		} else {
 			responseFunction('Could not add ' + uuid);
 		}
