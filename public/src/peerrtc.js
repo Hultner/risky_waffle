@@ -18,6 +18,9 @@ peer.on('call', function(call){
 peer.on('error', function(err){
   //alert(err.message); // Errors are disruptive and not productive on busstop
 });
+peer.on('close', function() {
+	window.refresh();
+});
 
 // Click handlers setup
 $(function(){
