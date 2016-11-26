@@ -1,13 +1,19 @@
 var NO_LOCATION = 'ANTARCTICA';
-var gotUserLocationCallback = function(location) {}; // Empty callback
+var geoStarted = false;
+var callbacks = [];
 var cachedLocation = undefined;
 
 function getUserLocation(callback) {
+	// Only start one geolocation lookup
+	if(!geoStarted) {
+		geoStarted = true;
+		initiate_geolocation();
+	}
+	
 	if(cachedLocation != undefined) {
 		callback(cachedLocation);
 	} else {
-		gotUserLocationCallback = callback;
-		initiate_geolocation();
+		cachedLocation.push(callback);
 	}
 }
 
@@ -49,5 +55,9 @@ function handle_geolocation_query(position) {
 
 function setLocation(place) {
 	cachedLocation = place;
-	gotUserLocationCallback(place);
+	
+	for(var i = 0; i<callbacks.length; i++) {
+		callbacks[i](place);
+	}
+	callbacks = [];
 }
