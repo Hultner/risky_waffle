@@ -19,6 +19,17 @@ function pageReady() {
     localVideo = document.getElementById('localVideo');
     remoteVideo = document.getElementById('remoteVideo');
 
+    var constraints = {
+        video: true,
+        audio: false
+    };
+
+    if(navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia(constraints).then(getUserMediaSuccess).catch(errorHandler);
+    } else {
+        alert('Your browser does not support getUserMedia API');
+    }
+
     findBusStop(function(response){
         if(response.uuid && response.sdp && response.data){
             // Start connection
@@ -44,17 +55,6 @@ function pageReady() {
             setTimeout(function(){registerForVideo(uuid, getLocation(), sdp, iceCandidates);}, 500);
         }
     });
-
-    var constraints = {
-        video: true,
-        audio: false
-    };
-
-    if(navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia(constraints).then(getUserMediaSuccess).catch(errorHandler);
-    } else {
-        alert('Your browser does not support getUserMedia API');
-    }
 }
 
 function getUserMediaSuccess(stream) {
