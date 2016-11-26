@@ -82,7 +82,7 @@ exports.getRandomAvailableBusStop = function(){
 		}
     }
 	if(availableBusStops.length == 0) {
-		return "{}";
+		return undefined;
 	}
     var randomIndex = Math.floor(Math.random()*availableBusStops.length);
     return availableBusStops[randomIndex];
