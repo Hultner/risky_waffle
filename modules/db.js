@@ -6,15 +6,17 @@ var fs = require('fs');
  * Returns the data from db.json
  */
 exports.read = function() {
-  var data = JSON.parse(fs.readFileSync('db/db.json', 'utf-8'));
-  return data;
+	var data = JSON.parse(fs.readFileSync('db/db.json', 'utf-8'));
+	console.log(data);
+	console.log(data.length);
+	return data;
 };
 
 /**
  * Writes data from db.json
  */
 exports.write = function(dbData) {
-  fs.writeFileSync('db/db.json', JSON.stringify(dbData), 'utf-8');
+	fs.writeFileSync('db/db.json', JSON.stringify(dbData), 'utf-8');
 };
 
 exports.addBusStop = function(busStop) {
@@ -33,7 +35,6 @@ exports.addBusStop = function(busStop) {
 };
 
 exports.remove = function(ip){
-  //remove
     var database = exports.read();
     var indexOfIp = indexOf(database, ip);
     database = database.splice(indexOfIp, 1);
@@ -42,7 +43,7 @@ exports.remove = function(ip){
 
 function indexOf(db, ip){
     var count = 0;
-    while(db.length--){
+    while(count < db.length){
         if (db[count].ip == ip) {
             return count;
         } else{
@@ -51,4 +52,5 @@ function indexOf(db, ip){
     }
     return -1;
 }
+
 module.exports = exports;
