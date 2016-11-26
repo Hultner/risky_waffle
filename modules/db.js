@@ -68,6 +68,34 @@ exports.getLocation = function(uuid) {
 
 exports.getAllBusStops = function() {
 	return read();
-}
+};
+
+
+exports.getRandomAvailableBusStop = function(){
+    var database = read();
+    var availableBusstops = [];
+	for(entry in database){
+		if (entry.status == 'available'){
+			availableBusstops.push(entry);
+		}
+    }
+    var randomIndex = Math.floor(Math.random()*availableBusstops.length);
+    return availableBusstops[randomIndex] ;
+};
+
+exports.setStatus = function ( uuid, status ){
+	var busStop;
+	var dataBase = read();
+	var indexOfBusstop;
+	if (indexOf(dataBase, uuid) == - 1){
+		return -1;
+	}else{
+		indexOfBusstop = indexOf(dataBase,uuid);
+	}
+	busStop = dataBase[indexOfBusstop];
+	busStop.status = status;
+	dataBase = dataBase.splice(indexOfBusstop, 1);
+	write(dataBase);
+};
 
 module.exports = exports;

@@ -1,6 +1,7 @@
 var exports = {};
 
 var db = require('./db');
+var legalStatus =['available', 'unavailable', 'inactive'];
 
 exports.addBusStop = function(uuid, city, responseFunction) {
 	var busStop = {'uuid': uuid, 'location': city, 'status': 'available'};
@@ -29,6 +30,22 @@ exports.getLocation = function(uuid, responseFunction) {
 		responseFunction('No location for '+uuid);
 	} else {
 		responseFunction(undefined, loc);
+	}
+};
+
+exports.removeBusStop = function(ip){
+	db.removeBusStop(ip);
+};
+
+exports.getRandomAvailableBusStop = function(){
+	return db.getRandomAvailableBusStop();
+};
+
+exports.setStatus = function( uuid, status ){
+	if(legalStatus.indexOf(status) != -1){
+        db.setStatus(uuid, status);
+	}else{
+		return -1;
 	}
 };
 
