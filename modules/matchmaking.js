@@ -2,31 +2,31 @@ var exports = {};
 
 var db = require('./db');
 
-exports.addBusStop = function(ip, city, responseFunction) {
-	var busStop = {'ip': ip, 'location': city, 'status': 'active'};
+exports.addBusStop = function(uuid, city, responseFunction) {
+	var busStop = {'uuid': uuid, 'location': city, 'status': 'available'};
 	var ok = db.addBusStop(busStop);
 	
 	if(ok) {
-		responseFunction(undefined, ip +' @ ' + city + ' added');
+		responseFunction(undefined, uuid +' @ ' + city + ' added');
 	} else {
-		responseFunction('Could not add ' + ip);
+		responseFunction('Could not add ' + uuid);
 	}
 };
 
-exports.removeBusStop = function(ip, responseFunction) {
+exports.removeBusStop = function(uuid, responseFunction) {
 	db.removeBusStop();
-	responseFunction(undefined, 'Removed '+ip);
+	responseFunction(undefined, 'Removed '+uuid);
 };
 
 exports.getAllBusStops = function(responseFunction) {
 	responseFunction(undefined, db.getAllBusStops());
 };
 
-exports.getLocation = function(ip, responseFunction) {
-	var loc = db.getLocationFromIP(ip);
+exports.getLocation = function(uuid, responseFunction) {
+	var loc = db.getLocation(uuid);
 	
 	if(loc == undefined) {
-		responseFunction('No location for '+ip);
+		responseFunction('No location for '+uuid);
 	} else {
 		responseFunction(undefined, loc);
 	}

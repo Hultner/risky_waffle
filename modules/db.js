@@ -18,12 +18,12 @@ function write(dbData) {
 };
 
 /*
- * Get "id" of busStop based on ip.
+ * Get "id" of busStop based on uuid.
  */
-function indexOf(db, ip){
+function indexOf(db, uuid){
     var count = 0;
     while(count < db.length){
-        if (db[count].ip == ip) {
+        if (db[count].uuid == uuid) {
             return count;
         } else{
             count ++;
@@ -35,7 +35,7 @@ function indexOf(db, ip){
 
 exports.addBusStop = function(busStop) {
 	var database = read();
-	var busStopIndex = indexOf(database, busStop.ip);
+	var busStopIndex = indexOf(database, busStop.uuid);
 	
 	if(busStopIndex == -1) {
 		database.push(busStop);
@@ -48,16 +48,16 @@ exports.addBusStop = function(busStop) {
 	return true;
 };
 
-exports.removeBusStop = function(ip) {
+exports.removeBusStop = function(uuid) {
     var database = read();
-    var indexOfIp = indexOf(database, ip);
-    database.splice(indexOfIp, 1);
+    var indexOfuuid = indexOf(database, uuid);
+    database.splice(indexOfuuid, 1);
     write(database);
 };
 
-exports.getLocationFromIP = function(ip) {
+exports.getLocation = function(uuid) {
 	var database = read();
-	var index = indexOf(database, ip);
+	var index = indexOf(database, uuid);
 	
 	if(index == -1) {
 		return undefined;

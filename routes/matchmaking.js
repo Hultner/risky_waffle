@@ -3,7 +3,7 @@ var router = express.Router();
 
 var matchmakingModule = require('../modules/matchmaking');
 
-router.get('/addBusStop/:ip/:city', function(req, res, next) {
+router.get('/addBusStop/:uuid/:city', function(req, res, next) {
 	var responseFunction = function (err, result) {
         if (err) {
             return res.status(500).json(err);
@@ -12,10 +12,10 @@ router.get('/addBusStop/:ip/:city', function(req, res, next) {
         res.json(result);
     };
 	
-    matchmakingModule.addBusStop(req.params.ip, req.params.city, responseFunction);
+    matchmakingModule.addBusStop(req.params.uuid, req.params.city, responseFunction);
 });
 
-router.get('/removeBusStop/:ip', function(req, res, next) {
+router.get('/removeBusStop/:uuid', function(req, res, next) {
 	var responseFunction = function (err, result) {
         if (err) {
             return res.status(500).json(err);
@@ -24,7 +24,7 @@ router.get('/removeBusStop/:ip', function(req, res, next) {
         res.json(result);
     };
 	
-    matchmakingModule.removeBusStop(req.params.ip, responseFunction);
+    matchmakingModule.removeBusStop(req.params.uuid, responseFunction);
 });
 
 router.get('/listBusStops', function(req, res, next) {
@@ -39,7 +39,7 @@ router.get('/listBusStops', function(req, res, next) {
     matchmakingModule.getAllBusStops(responseFunction);
 });
 
-router.get('/location/:ip', function(req, res, next) {
+router.get('/location/:uuid', function(req, res, next) {
 	var responseFunction = function (err, result) {
         if (err) {
             return res.status(404).json(err);
@@ -48,7 +48,7 @@ router.get('/location/:ip', function(req, res, next) {
         res.json(result);
     };
 	
-    matchmakingModule.getLocation(req.params.ip, responseFunction);
+    matchmakingModule.getLocation(req.params.uuid, responseFunction);
 });
 
 module.exports = router;
