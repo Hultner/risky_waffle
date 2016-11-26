@@ -44,14 +44,15 @@ function startConnection(){
             peerConnection = new RTCPeerConnection(peerConnectionConfig);
             peerConnection.onaddstream = gotRemoteStream;
             peerConnection.addStream(localStream);
-            peerConnection.setRemoteDescription(new RTCSessionDescription(response.sdp.sdp)).then(function(){
+            peerConnection.setRemoteDescription(new RTCSessionDescription(JSON.parse(response.sdp))).then(function(){
                 if(response.sdp.type == 'offer') {
                     peerConnection.createAnswer().then(createdDescription).catch(errorHandler);
                 }
             }).catch(errorHandler);
             
-            for(var i = 0; i<response.data.length; i++){
-                peerConnection.addIceCandidate(new RTCIceCandidate(response.data[i])).catch(errorHandler);
+            var ice = JSON.parse(response.data);
+            for(var i = 0; i<ice.length; i++){
+                peerConnection.addIceCandidate(new RTCIceCandidate(ice[i])).catch(errorHandler);
             }
         }else{
             console.log('waiting for a connection.....');
