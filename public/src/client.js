@@ -21,8 +21,8 @@ function getDataFromMatchmaking(page, data, doneFunc, errorFunc){
     });
 }
 
-function registerForVideo(uuid, location, callback){
-    sendDataToMatchmaking('add', {'uuid':uuid, 'location':location}, undefined, callback);
+function registerForVideo(uuid, location, sdp, ice, callback){
+    sendDataToMatchmaking('add', {'uuid':uuid, 'location':location, 'sdp':sdp, 'data':ice}, undefined, callback);
 }
 
 function findBusStop(callback){
