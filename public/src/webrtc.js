@@ -40,9 +40,10 @@ function pageReady() {
             // Start connection
             peerConnection = new RTCPeerConnection(peerConnectionConfig);
             peerConnection.onaddstream = gotRemoteStream;
-            peerConnection.addStream(localStream);
+            if(localStream)
+                peerConnection.addStream(localStream);
             peerConnection.setRemoteDescription(new RTCSessionDescription(response.sdp)).then(function(){
-                if(signal.sdp.type == 'offer') {
+                if(response.sdp.type == 'offer') {
                     peerConnection.createAnswer().then(createdDescription).catch(errorHandler);
                 }
             }).catch(errorHandler);
@@ -55,7 +56,8 @@ function pageReady() {
             peerConnection = new RTCPeerConnection(peerConnectionConfig);
             peerConnection.onicecandidate = gotIceCandidate;
             peerConnection.onaddstream = gotRemoteStream;
-            peerConnection.addStream(localStream);
+            if(localStream)
+                peerConnection.addStream(localStream);
             peerConnection.createOffer().then(createdDescription).catch(errorHandler);
             
             getUserLocation(function(loc){nodeLocation = loc;});
@@ -66,6 +68,9 @@ function pageReady() {
 }
 
 function getUserMediaSuccess(stream) {
+    if(peerConnection){
+        peerConnection.addStream(stream)
+    }
     localStream = stream;
     localVideo.src = window.URL.createObjectURL(stream);
 }
