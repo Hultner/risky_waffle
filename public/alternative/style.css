@@ -37,7 +37,7 @@ Copyright (c) Nicolas Gallagher and Jonathan Neal
 *, *:before, *:after {
   -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 }
-/*
+
 #my-video {
   margin-top: 15px;
   width: 280px;
@@ -63,4 +63,3 @@ Copyright (c) Nicolas Gallagher and Jonathan Neal
 #my-id {
   font-weight: bold;
 }
-*/
