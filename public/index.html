@@ -2,10 +2,18 @@
 <html>
     <head>
         <link rel="stylesheet" href="style.css" media="screen" >
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUWbFlphcRP1_TLsBNmtjz6_ZpLlnNCl4"></script>
         <script src="src/adapter.js"></script>
         <script src="src/webrtc.js"></script>
         <script src="src/client.js"></script>
+        <script src="src/location.js"></script>
         <script src="src/jquery-3.1.1.min.js"></script>
+		
+		<script type="text/javascript">
+			getUserLocation(function(place) {
+				document.getElementById('city-tag').innerText = place;
+			});
+		</script>
     </head>
 
     <body id="debug">
