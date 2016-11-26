@@ -11,17 +11,10 @@
   <script type="text/javascript" src="src/location.js"></script>
 
   <script>
-    var time = new Date().getTime();
-    function refresh(){
-        if(new Date().getTime() - time >= 45000){
-            console.log('reload');
-            window.location.reload(true);
-
-        }else{
-            setTimeout(refresh, 10000);
-        }
+    function refresh() {
+        window.location.reload(true);
     }
-    setTimeout(refresh, 10000);
+    setTimeout(refresh, 45000);
   </script>
 </head>
 
