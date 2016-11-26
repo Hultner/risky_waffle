@@ -3,11 +3,11 @@ var exports = {};
 var db = require('./db');
 var legalStatus =['available', 'unavailable', 'inactive'];
 
-exports.addBusStop = function(uuid, city, sdp, responseFunction) {
+exports.addBusStop = function(uuid, city, sdp, data, responseFunction) {
 	if(uuid == undefined || city == undefined || sdp == undefined) {
 		responseFunction('Missing data');
 	} else {
-		var busStop = {'uuid': uuid, 'location': city, 'sdp': sdp, 'status': 'available'};
+		var busStop = {'uuid': uuid, 'location': city, 'sdp': sdp, 'status': 'available', 'debugData': data};
 		var ok = db.addBusStop(busStop);
 		
 		if(ok) {
