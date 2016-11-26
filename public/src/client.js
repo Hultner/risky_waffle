@@ -1,5 +1,3 @@
-start(true);
-
 
 function sendDataToMatchmaking(page, data, doneFunc, errorFunc){
     $.post(window.location.hostname + '/busstop/' + page, data).done(function(response){
