@@ -14,14 +14,14 @@ peer.on('call', function(call){
   setRemotePeerLocation(call.metadata);
   call.answer(window.localStream);
   clearTimeout(window.mainTimer);
-  window.mainTimer = setTimeout(refresh(), 45000);
+  window.mainTimer = setTimeout(refresh, 45000);
   openCall(call);
 });
 peer.on('error', function(err){
   //alert(err.message); // Errors are disruptive and not productive on busstop
 });
 peer.on('close', function() {
-	window.location.reload(true);
+	refresh();
 });
 
 // Click handlers setup
@@ -54,7 +54,7 @@ function openCall(call){
 function call (id, place) {
 
   clearTimeout(window.mainTimer);
-  window.mainTimer = setTimeout(refresh(), 45000);
+  window.mainTimer = setTimeout(refresh, 45000);
   var call = peer.call(id, window.localStream, {'metadata': place});
   openCall(call);
 }
