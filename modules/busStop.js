@@ -34,7 +34,13 @@ exports.getLocation = function(uuid, responseFunction) {
 };
 
 exports.getRandomAvailableBusStop = function(responseFunction){
-	responseFunction(undefined, db.getRandomAvailableBusStop());
+	busStop = db.getRandomAvailableBusStop();
+	if (busStop != undefined){
+        db.setStatus(busStop.uuid, 'unavailable');
+        responseFunction(undefined, busStop);
+	}else{
+		responseFunction(undefined, {});
+	}
 };
 
 exports.setStatus = function( uuid, status, responseFunction ){
