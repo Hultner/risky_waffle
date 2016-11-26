@@ -46,8 +46,8 @@ function openCall(call){
 
 }
 
-function call (id){
-  var call = peer.call(id, window.localStream);
+function call (id, place) {
+  var call = peer.call(id, window.localStream, {'userLocation': place});
   openCall(call);
 }
 
@@ -56,11 +56,13 @@ function readyPeer(uuid){
 
   findBusStop(function(response){
       if(response.uuid && response.uuid.length < 25){
-          console.log('trying to start a connection');
-          console.log(response, response.uuid);
-          call(response.uuid);
-          console.log(response.uuid);
-		  setRemotePeerLocation(response.location);
+		  getUserLocation(function(loc){
+			console.log('trying to start a connection');
+			console.log(response, response.uuid);
+			call(response.uuid, loc);
+			console.log(response.uuid);
+			setRemotePeerLocation(response.location);
+          });
       }else{
           console.log('waiting for a connection.....');
 

@@ -1016,6 +1016,7 @@ Peer.prototype.call = function(peer, stream, options) {
     util.error('To call a peer, you must provide a stream from your browser\'s `getUserMedia`.');
     return;
   }
+console.log(options);
   options = options || {};
   options._stream = stream;
   var call = new MediaConnection(peer, this, options);
