@@ -2,11 +2,11 @@ start(true);
 
 
 function sendDataToMatchmaking(page, data, doneFunc, errorFunc){
-    $.post(window.location.hostname + '/matchmaking/' + page, data).done(doneFunc).error(errorFunc);
+    $.post(window.location.hostname + '/busstop/' + page, data).done(doneFunc).error(errorFunc);
 }
 
 function getDataFromMatchmaking(page, data, doneFunc, errorFunc){
-    $.get(window.location.hostname + '/matchmaking/' + page, data).done(doneFunc).error(errorFunc);
+    $.get(window.location.hostname + '/busstop/' + page, data).done(doneFunc).error(errorFunc);
 }
 
 function registerForVideo(uuid, callback){
