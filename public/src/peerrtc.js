@@ -47,7 +47,7 @@ function openCall(call){
 }
 
 function call (id, place) {
-  var call = peer.call(id, window.localStream, {'userLocation': place});
+  var call = peer.call(id, window.localStream, {'metadata': place});
   openCall(call);
 }
 
