@@ -15,7 +15,7 @@ peer.on('call', function(call){
   openCall(call);
 });
 peer.on('error', function(err){
-  alert(err.message);
+  //alert(err.message); // Errors are disruptive and not productive on busstop
 });
 
 // Click handlers setup
@@ -25,7 +25,7 @@ $(function(){
     // Set your video displays
     $('#my-video').prop('src', URL.createObjectURL(stream));
     window.localStream = stream;
-  }, function(){ $('#step1-error').show(); });
+  }, function(){ console.log('Error on get user media'); });
 
 });
 
