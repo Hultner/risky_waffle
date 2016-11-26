@@ -10,6 +10,7 @@ peer.on('open', function(){
 
 // Receiving a call
 peer.on('call', function(call){
+  $('#loader').remove();
   // Answer the call automatically (instead of prompting user) for demo purposes
   setRemotePeerLocation(call.metadata);
   call.answer(window.localStream);
@@ -40,6 +41,7 @@ function openCall(call){
   if (window.existingCall) {
     window.existingCall.close();
   }
+  $('#loader').remove();
 
   // Wait for stream on the call, then set peer video display
   call.on('stream', function(stream){
@@ -57,7 +59,7 @@ function call (id, place) {
   window.mainTimer = setTimeout(refresh, 45000);
   var call = peer.call(id, window.localStream, {'metadata': place});
   openCall(call);
-  
+
   call.on('close', function() {
 	refresh();
   });
