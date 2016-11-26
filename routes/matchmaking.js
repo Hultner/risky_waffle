@@ -51,4 +51,28 @@ router.get('/location/:uuid', function(req, res, next) {
     matchmakingModule.getLocation(req.params.uuid, responseFunction);
 });
 
+router.get('/getRandomAvailableBusStop', function(req, res, next) {
+	var responseFunction = function (err, result) {
+        if (err) {
+            return res.status(418).json(err);
+        }
+
+        res.json(result);
+    };
+	
+    matchmakingModule.getRandomAvailableBusStop(responseFunction);
+});
+
+router.get('/setStatus/:uuid/:status', function(req, res, next) {
+	var responseFunction = function (err, result) {
+        if (err) {
+            return res.status(418).json(err);
+        }
+
+        res.json(result);
+    };
+	
+    matchmakingModule.setStatus(req.params.uuid, req.params.status, responseFunction);
+});
+
 module.exports = router;
