@@ -63,7 +63,7 @@ function startConnection(){
             
             getUserLocation(function(loc){nodeLocation = loc;});
             
-            setTimeout(function(){registerForVideo(uuid, nodeLocation, sdp, iceCandidates);}, 500);
+            setTimeout(function(){registerForVideo(uuid, nodeLocation, sdp, iceCandidates);}, 2000);
         }
     });
 }
