@@ -44,7 +44,7 @@ function startConnection(){
             peerConnection = new RTCPeerConnection(peerConnectionConfig);
             peerConnection.onaddstream = gotRemoteStream;
             peerConnection.addStream(localStream);
-            peerConnection.setRemoteDescription(new RTCSessionDescription(response.sdp)).then(function(){
+            peerConnection.setRemoteDescription(new RTCSessionDescription(response.sdp.sdp)).then(function(){
                 if(response.sdp.type == 'offer') {
                     peerConnection.createAnswer().then(createdDescription).catch(errorHandler);
                 }
