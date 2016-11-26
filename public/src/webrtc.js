@@ -28,8 +28,8 @@ function pageReady() {
             peerConnection.setRemoteDescription(new RTCSessionDescription(response.sdp)).then(function(){
                 if(signal.sdp.type == 'offer') {
                     peerConnection.createAnswer().then(createdDescription).catch(errorHandler);
-                }).catch(errorHandler);
-            }
+                }
+            }).catch(errorHandler);
             
             for(var i = 0; i<response.data.length; i++){
                 peerConnection.addIceCandidate(new RTCIceCandidate(response.data[i])).catch(errorHandler);
