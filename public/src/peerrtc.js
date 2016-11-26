@@ -16,6 +16,7 @@ peer.on('call', function(call){
   clearTimeout(window.mainTimer);
   window.mainTimer = setTimeout(refresh, 45000);
   openCall(call);
+  console.log(call);
 });
 peer.on('error', function(err){
   //refresh();
