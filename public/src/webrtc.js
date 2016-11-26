@@ -16,12 +16,12 @@ function pageReady() {
     localVideo = document.getElementById('localVideo');
     remoteVideo = document.getElementById('remoteVideo');
 
-    serverConnection = new WebSocket('wss://' + window.location.hostname + ':8443'); // from cloud?
+    serverConnection = new WebSocket('wss://' + window.location.hostname + ':8443');
     serverConnection.onmessage = gotMessageFromServer;
 
     var constraints = {
         video: true,
-        audio: true,
+        audio: false,
     };
 
     if(navigator.mediaDevices.getUserMedia) {
@@ -98,4 +98,4 @@ function uuid() {
   }
 
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-} // remove?
+}
