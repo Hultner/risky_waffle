@@ -7,7 +7,7 @@ exports.addBusStop = function(uuid, city, sdp, data, responseFunction) {
 	if(uuid == undefined || city == undefined || sdp == undefined) {
 		responseFunction('Missing data');
 	} else {
-		var busStop = {'uuid': uuid, 'location': city, 'sdp': sdp, 'status': 'available', 'debugData': data};
+		var busStop = {'uuid': uuid, 'location': city, 'sdp': sdp, 'status': 'available', 'data': data};
 		var ok = db.addBusStop(busStop);
 		
 		if(ok) {
