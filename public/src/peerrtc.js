@@ -18,9 +18,12 @@ peer.on('call', function(call){
   openCall(call);
 });
 peer.on('error', function(err){
-  //alert(err.message); // Errors are disruptive and not productive on busstop
+  //refresh();
 });
 peer.on('close', function() {
+	refresh();
+});
+peer.on('disconnected', function() {
 	refresh();
 });
 
