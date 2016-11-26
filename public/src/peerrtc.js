@@ -11,7 +11,7 @@ peer.on('open', function(){
 // Receiving a call
 peer.on('call', function(call){
   // Answer the call automatically (instead of prompting user) for demo purposes
-  console.log(call);
+  setRemotePeerLocation(call.metadata);
   call.answer(window.localStream);
   openCall(call);
 });
