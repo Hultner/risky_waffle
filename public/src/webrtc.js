@@ -31,7 +31,9 @@ function pageReady() {
     } else {
         alert('Your browser does not support getUserMedia API');
     }
+}
 
+function startConnection(){
     findBusStop(function(response){
         console.log(response);
         if(response.uuid && response.sdp && response.data){
@@ -41,8 +43,7 @@ function pageReady() {
             // Start connection
             peerConnection = new RTCPeerConnection(peerConnectionConfig);
             peerConnection.onaddstream = gotRemoteStream;
-            if(localStream)
-                peerConnection.addStream(localStream);
+            peerConnection.addStream(localStream);
             peerConnection.setRemoteDescription(new RTCSessionDescription(response.sdp)).then(function(){
                 if(response.sdp.type == 'offer') {
                     peerConnection.createAnswer().then(createdDescription).catch(errorHandler);
@@ -57,8 +58,7 @@ function pageReady() {
             peerConnection = new RTCPeerConnection(peerConnectionConfig);
             peerConnection.onicecandidate = gotIceCandidate;
             peerConnection.onaddstream = gotRemoteStream;
-            if(localStream)
-                peerConnection.addStream(localStream);
+            peerConnection.addStream(localStream);
             peerConnection.createOffer().then(createdDescription).catch(errorHandler);
             
             getUserLocation(function(loc){nodeLocation = loc;});
@@ -69,11 +69,9 @@ function pageReady() {
 }
 
 function getUserMediaSuccess(stream) {
-    if(peerConnection){
-        peerConnection.addStream(stream)
-    }
     localStream = stream;
     localVideo.src = window.URL.createObjectURL(stream);
+    startConnection();
 }
 
 function gotIceCandidate(event) {
