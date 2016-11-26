@@ -19,8 +19,8 @@ function getDataFromMatchmaking(page, data, doneFunc, errorFunc){
     });
 }
 
-function registerForVideo(uuid, location, sdp, ice, callback){
-    sendDataToMatchmaking('add', {'uuid':uuid, 'location':location, 'sdp':sdp, 'data':ice}, undefined, callback);
+function registerForVideo(uuid, loc, sdp, ice, callback){
+    sendDataToMatchmaking('add', {'uuid':uuid, 'location':loc, 'sdp':JSON.stringify(sdp), 'data':JSON.stringify(ice)}, undefined, callback);
 }
 
 function findBusStop(callback){
