@@ -80,7 +80,10 @@ function step3 (call) {
   $('#step3').show();
 }
 
-function call (id){}
+function call (id){
+  var call = peer.call(id, window.localStream);
+  step3(call);
+}
 
 function readyPeer(uuid){
 
