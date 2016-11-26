@@ -20,7 +20,7 @@ function getDataFromMatchmaking(page, data, doneFunc, errorFunc){
 }
 
 function registerForVideo(uuid, loc, sdp, ice, callback){
-    sendDataToMatchmaking('add', {'uuid':uuid, 'location':loc, 'sdp':JSON.stringify(sdp), 'data':JSON.stringify(ice)}, undefined, callback);
+    sendDataToMatchmaking('add', {'uuid':uuid, 'location':(loc||'Location not found'), 'sdp':JSON.stringify(sdp), 'data':JSON.stringify(ice)}, undefined, callback);
 }
 
 function findBusStop(callback){
