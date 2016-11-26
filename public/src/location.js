@@ -13,7 +13,7 @@ function getUserLocation(callback) {
 	if(cachedLocation != undefined) {
 		callback(cachedLocation);
 	} else {
-		cachedLocation.push(callback);
+		callbacks.push(callback);
 	}
 }
 
