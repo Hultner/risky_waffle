@@ -16,16 +16,12 @@ peer.on('call', function(call){
   clearTimeout(window.mainTimer);
   window.mainTimer = setTimeout(refresh, 45000);
   openCall(call);
-  console.log(call);
+  call.on('close', function() {
+	refresh();
+  });
 });
 peer.on('error', function(err){
   //refresh();
-});
-peer.on('close', function() {
-	refresh();
-});
-peer.on('disconnected', function() {
-	refresh();
 });
 
 // Click handlers setup
@@ -61,6 +57,10 @@ function call (id, place) {
   window.mainTimer = setTimeout(refresh, 45000);
   var call = peer.call(id, window.localStream, {'metadata': place});
   openCall(call);
+  
+  call.on('close', function() {
+	refresh();
+  });
 }
 
 function readyPeer(uuid){
