@@ -21,7 +21,7 @@ peer.on('error', function(err){
 // Click handlers setup
 $(function(){
 
-  navigator.getUserMedia({audio: false, video: true}, function(stream){
+  navigator.getUserMedia({audio: false, video: { width: 1080, height: 1920 }}, function(stream){
     // Set your video displays
     $('#my-video').prop('src', URL.createObjectURL(stream));
     window.localStream = stream;
