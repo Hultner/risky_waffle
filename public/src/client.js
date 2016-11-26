@@ -1,6 +1,6 @@
 
 function sendDataToMatchmaking(page, data, doneFunc, errorFunc){
-    $.post('busstop/' + page, data).done(function(response){
+    $.post('/busstop/' + page, data).done(function(response){
         if(doneFunc)
             doneFunc(response);
     }).fail(function(response){
@@ -10,7 +10,7 @@ function sendDataToMatchmaking(page, data, doneFunc, errorFunc){
 }
 
 function getDataFromMatchmaking(page, data, doneFunc, errorFunc){
-    $.get('busstop/' + page, data).done(function(response){
+    $.get('/busstop/' + page, data).done(function(response){
         if(doneFunc)
             doneFunc(response);
     }).fail(function(response){
@@ -20,13 +20,13 @@ function getDataFromMatchmaking(page, data, doneFunc, errorFunc){
 }
 
 function registerForVideo(uuid, loc, sdp, ice, callback){
-    sendDataToMatchmaking('add', {'uuid':uuid, 'location':(loc||'Location not found'), 'sdp':JSON.stringify(sdp), 'data':JSON.stringify(ice)}, undefined, callback);
+    sendDataToMatchmaking('/add', {'uuid':uuid, 'location':(loc||'Location not found'), 'sdp':JSON.stringify(sdp), 'data':JSON.stringify(ice)}, undefined, callback);
 }
 
 function findBusStop(callback){
-    getDataFromMatchmaking('find', {}, callback, callback);
+    getDataFromMatchmaking('/find', {}, callback, callback);
 }
 
 function setInactive(uuid, callback){
-    sendDataToMatchmaking('setStatus', {'uuid':uuid, 'status':'inactive'}, undefined, callback);
+    sendDataToMatchmaking('/setStatus', {'uuid':uuid, 'status':'inactive'}, undefined, callback);
 }
