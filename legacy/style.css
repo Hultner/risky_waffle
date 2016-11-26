@@ -1,0 +1,27 @@
+#localVideo{
+  display: none;
+}
+
+#debug #localVideo{
+  display: inline-block;
+  height: 1920px;
+}
+
+#remoteVideo{
+  height: 1920px;
+}
+
+#city-tag{
+  top: 66%;
+  width: 100%;
+  outline: 4px solid white;
+  position: absolute;
+  background: rgba(243,243,243,0.9);
+  font-size: 80px;
+  line-height: 100px;
+  padding: 40px 0;
+  font-family: SANS-SERIF;
+  color: rgb(33,33,33);
+  text-align: center;
+  word-break: break-all;
+}
