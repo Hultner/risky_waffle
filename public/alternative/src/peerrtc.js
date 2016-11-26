@@ -86,12 +86,12 @@ function readyPeer(uuid){
 
 
   findBusStop(function(response){
-      console.log(response, response.uuid);
-      call(response.uuid);
-      /*if(response.uuid && response.uuid.length < 25){
+      if(response.uuid && response.uuid.length < 25){
           console.log('trying to start a connection');
+          console.log(response, response.uuid);
+          call(response.uuid);
           console.log(response.uuid);
-          console.log(response.data);
+          /*console.log(response.data);
           // Start connection
           peerConnection = new RTCPeerConnection(peerConnectionConfig);
           peerConnection.onaddstream = gotRemoteStream;
