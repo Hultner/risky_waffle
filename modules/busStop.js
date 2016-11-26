@@ -4,13 +4,17 @@ var db = require('./db');
 var legalStatus =['available', 'unavailable', 'inactive'];
 
 exports.addBusStop = function(uuid, city, responseFunction) {
-	var busStop = {'uuid': uuid, 'location': city, 'status': 'available'};
-	var ok = db.addBusStop(busStop);
-	
-	if(ok) {
-		responseFunction(undefined, uuid +' @ ' + city + ' added');
+	if(uuid == undefined || city == undefined) {
+		responseFunction('Missing data');
 	} else {
-		responseFunction('Could not add ' + uuid);
+		var busStop = {'uuid': uuid, 'location': city, 'status': 'available'};
+		var ok = db.addBusStop(busStop);
+		
+		if(ok) {
+			responseFunction(undefined, uuid +' @ ' + city + ' added');
+		} else {
+			responseFunction('Could not add ' + uuid);
+		}
 	}
 };
 

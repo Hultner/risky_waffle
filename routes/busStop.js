@@ -3,22 +3,22 @@ var router = express.Router();
 
 var busStopModule = require('../modules/busStop');
 
-router.get('/add/:uuid/:city', function(req, res, next) {
+router.post('/add', function(req, res, next) {
 	var responseFunction = function (err, result) {
         if (err) {
-            return res.status(500).json(err);
+            return res.status(400).json(err);
         }
 
         res.json(result);
     };
 	
-    busStopModule.addBusStop(req.params.uuid, req.params.city, responseFunction);
+	busStopModule.addBusStop(req.body.uuid, req.body.location, responseFunction);
 });
 
 router.get('/remove/:uuid', function(req, res, next) {
 	var responseFunction = function (err, result) {
         if (err) {
-            return res.status(500).json(err);
+            return res.status(400).json(err);
         }
 
         res.json(result);
@@ -66,7 +66,7 @@ router.get('/find', function(req, res, next) {
 router.get('/setStatus/:uuid/:status', function(req, res, next) {
 	var responseFunction = function (err, result) {
         if (err) {
-            return res.status(418).json(err);
+            return res.status(400).json(err);
         }
 
         res.json(result);
