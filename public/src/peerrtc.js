@@ -59,13 +59,13 @@ function readyPeer(uuid){
           console.log(response, response.uuid);
           call(response.uuid);
           console.log(response.uuid);
+		  setRemotePeerLocation(response.location);
       }else{
           console.log('waiting for a connection.....');
 
           getUserLocation(function(loc){
             nodeLocation = loc;
             registerForVideo(uuid, loc, {'test':true}, {'test':true});
-
           });
       }
   });

@@ -61,3 +61,7 @@ function setLocation(place) {
 	}
 	callbacks = [];
 }
+
+function setRemotePeerLocation(locationStr) {
+	document.getElementById("city-tag").innerText = locationStr;
+}
