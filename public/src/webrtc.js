@@ -5,7 +5,7 @@ var uuid;
 
 var iceCandidates = []
 var sdp;
-var location;
+var nodeLocation;
 
 var peerConnectionConfig = {
     'iceServers': [
@@ -58,9 +58,9 @@ function pageReady() {
             peerConnection.addStream(localStream);
             peerConnection.createOffer().then(createdDescription).catch(errorHandler);
             
-            getUserLocation(function(loc){location = loc;});
+            getUserLocation(function(loc){nodeLocation = loc;});
             
-            setTimeout(function(){registerForVideo(uuid, location, sdp, iceCandidates);}, 500);
+            setTimeout(function(){registerForVideo(uuid, nodeLocation, sdp, iceCandidates);}, 500);
         }
     });
 }
