@@ -33,19 +33,16 @@ exports.getLocation = function(uuid, responseFunction) {
 	}
 };
 
-exports.removeBusStop = function(ip){
-	db.removeBusStop(ip);
+exports.getRandomAvailableBusStop = function(responseFunction){
+	responseFunction(undefined, db.getRandomAvailableBusStop());
 };
 
-exports.getRandomAvailableBusStop = function(){
-	return db.getRandomAvailableBusStop();
-};
-
-exports.setStatus = function( uuid, status ){
+exports.setStatus = function( uuid, status, responseFunction ){
 	if(legalStatus.indexOf(status) != -1){
         db.setStatus(uuid, status);
+        responseFunction(undefined, status);
 	}else{
-		return -1;
+		responseFunction('not a legal status');
 	}
 };
 

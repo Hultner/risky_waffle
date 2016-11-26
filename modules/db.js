@@ -73,14 +73,16 @@ exports.getAllBusStops = function() {
 
 exports.getRandomAvailableBusStop = function(){
     var database = read();
-    var availableBusstops = [];
-	for(entry in database){
+    var availableBusStops = [];
+	for(index in database){
+		entry = database[index];
+        console.log(entry);
 		if (entry.status == 'available'){
-			availableBusstops.push(entry);
+			availableBusStops.push(entry);
 		}
     }
-    var randomIndex = Math.floor(Math.random()*availableBusstops.length);
-    return availableBusstops[randomIndex] ;
+    var randomIndex = Math.floor(Math.random()*availableBusStops.length);
+    return availableBusStops[randomIndex] ;
 };
 
 exports.setStatus = function ( uuid, status ){
@@ -94,7 +96,7 @@ exports.setStatus = function ( uuid, status ){
 	}
 	busStop = dataBase[indexOfBusstop];
 	busStop.status = status;
-	dataBase = dataBase.splice(indexOfBusstop, 1);
+	dataBase.splice(indexOfBusstop, 1);
 	write(dataBase);
 };
 
