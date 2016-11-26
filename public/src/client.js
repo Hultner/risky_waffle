@@ -3,7 +3,7 @@ function sendDataToMatchmaking(page, data, doneFunc, errorFunc){
     $.post(window.location.hostname + '/busstop/' + page, data).done(function(response){
         if(doneFunc)
             doneFunc(JSON.parse(response));
-    }).error(function(response){
+    }).fail(function(response){
         if(errorFunc)
             errorFunc({'error':true});
     });
@@ -13,7 +13,7 @@ function getDataFromMatchmaking(page, data, doneFunc, errorFunc){
     $.get(window.location.hostname + '/busstop/' + page, data).done(function(response){
         if(doneFunc)
             doneFunc(JSON.parse(response));
-    }).error(function(response){
+    }).fail(function(response){
         if(errorFunc)
             errorFunc({'error':true});
     });
