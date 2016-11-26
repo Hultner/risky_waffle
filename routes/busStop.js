@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-var matchmakingModule = require('../modules/matchmaking');
+var busStopModule = require('../modules/busStop');
 
-router.get('/addBusStop/:uuid/:city', function(req, res, next) {
+router.get('/add/:uuid/:city', function(req, res, next) {
 	var responseFunction = function (err, result) {
         if (err) {
             return res.status(500).json(err);
@@ -12,10 +12,10 @@ router.get('/addBusStop/:uuid/:city', function(req, res, next) {
         res.json(result);
     };
 	
-    matchmakingModule.addBusStop(req.params.uuid, req.params.city, responseFunction);
+    busStopModule.addBusStop(req.params.uuid, req.params.city, responseFunction);
 });
 
-router.get('/removeBusStop/:uuid', function(req, res, next) {
+router.get('/remove/:uuid', function(req, res, next) {
 	var responseFunction = function (err, result) {
         if (err) {
             return res.status(500).json(err);
@@ -24,10 +24,10 @@ router.get('/removeBusStop/:uuid', function(req, res, next) {
         res.json(result);
     };
 	
-    matchmakingModule.removeBusStop(req.params.uuid, responseFunction);
+    busStopModule.removeBusStop(req.params.uuid, responseFunction);
 });
 
-router.get('/listBusStops', function(req, res, next) {
+router.get('/list', function(req, res, next) {
 	var responseFunction = function (err, result) {
         if (err) {
             return res.status(500).json(err);
@@ -36,7 +36,7 @@ router.get('/listBusStops', function(req, res, next) {
         res.json(result);
     };
 	
-    matchmakingModule.getAllBusStops(responseFunction);
+    busStopModule.getAllBusStops(responseFunction);
 });
 
 router.get('/location/:uuid', function(req, res, next) {
@@ -48,10 +48,10 @@ router.get('/location/:uuid', function(req, res, next) {
         res.json(result);
     };
 	
-    matchmakingModule.getLocation(req.params.uuid, responseFunction);
+    busStopModule.getLocation(req.params.uuid, responseFunction);
 });
 
-router.get('/getRandomAvailableBusStop', function(req, res, next) {
+router.get('/find', function(req, res, next) {
 	var responseFunction = function (err, result) {
         if (err) {
             return res.status(418).json(err);
@@ -60,7 +60,7 @@ router.get('/getRandomAvailableBusStop', function(req, res, next) {
         res.json(result);
     };
 	
-    matchmakingModule.getRandomAvailableBusStop(responseFunction);
+    busStopModule.getRandomAvailableBusStop(responseFunction);
 });
 
 router.get('/setStatus/:uuid/:status', function(req, res, next) {
@@ -72,7 +72,7 @@ router.get('/setStatus/:uuid/:status', function(req, res, next) {
         res.json(result);
     };
 	
-    matchmakingModule.setStatus(req.params.uuid, req.params.status, responseFunction);
+    busStopModule.setStatus(req.params.uuid, req.params.status, responseFunction);
 });
 
 module.exports = router;

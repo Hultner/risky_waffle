@@ -94,9 +94,7 @@ exports.setStatus = function ( uuid, status ){
 	}else{
 		indexOfBusstop = indexOf(dataBase,uuid);
 	}
-	busStop = dataBase[indexOfBusstop];
-	busStop.status = status;
-	dataBase.splice(indexOfBusstop, 1);
+	dataBase[indexOfBusstop].status = status;
 	write(dataBase);
 };
 
