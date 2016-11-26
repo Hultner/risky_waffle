@@ -5,6 +5,7 @@ var uuid;
 
 var iceCandidates = []
 var sdp;
+var location;
 
 var peerConnectionConfig = {
     'iceServers': [
@@ -52,7 +53,9 @@ function pageReady() {
             peerConnection.addStream(localStream);
             peerConnection.createOffer().then(createdDescription).catch(errorHandler);
             
-            setTimeout(function(){registerForVideo(uuid, getLocation(), sdp, iceCandidates);}, 500);
+            getUserLocation(function(loc){location = loc;});
+            
+            setTimeout(function(){registerForVideo(uuid, location, sdp, iceCandidates);}, 500);
         }
     });
 }
@@ -64,7 +67,7 @@ function getUserMediaSuccess(stream) {
 
 function gotIceCandidate(event) {
     if(event.candidate != null) {
-        iceCandidates.append(event.candidate);
+        iceCandidates.push(event.candidate);
     }
 }
 
