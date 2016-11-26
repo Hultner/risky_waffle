@@ -14,12 +14,13 @@
     function refresh() {
         window.location.reload(true);
     }
-    window.mainTimer = setTimeout(refresh, 45000);
+    setTimeout(refresh, 45000);
   </script>
 </head>
 
 <body>
 
+  <div id="loader"></div>
   <div id="city-tag"></div>
   <video id="their-video" muted="true" autoplay></video>
   <video id="my-video" muted="true" autoplay></video>
