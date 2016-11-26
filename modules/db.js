@@ -6,7 +6,7 @@ var fs = require('fs');
  * Returns the data from db.json
  */
 exports.read = function() {
-  var data = JSON.parse(fs.readFileSync('../db/db.json', 'utf-8'));
+  var data = JSON.parse(fs.readFileSync('db/db.json', 'utf-8'));
   return data;
 };
 
@@ -14,7 +14,22 @@ exports.read = function() {
  * Writes data from db.json
  */
 exports.write = function(dbData) {
-  fs.writeFileSync('../db/db.json', JSON.stringify(dbData), 'utf-8');
+  fs.writeFileSync('db/db.json', JSON.stringify(dbData), 'utf-8');
+};
+
+exports.addBusStop = function(busStop) {
+	var database = exports.read();
+	var busStopIndex = indexOf(database, busStop.ip);
+	
+	if(busStopIndex == -1) {
+		database.push(busStop);
+	} else {
+		database[busStopIndex] = busStop;
+	}
+	
+	exports.write(database);
+	
+	return true;
 };
 
 exports.remove = function(ip){
@@ -25,7 +40,7 @@ exports.remove = function(ip){
     exports.write(database);
 };
 
-function indexOf( db, ip){
+function indexOf(db, ip){
     var count = 0;
     while(db.length--){
         if (db[count].ip == ip) {
