@@ -298,7 +298,7 @@ var Negotiator = require('./negotiator');
 function MediaConnection(peer, provider, options) {
   if (!(this instanceof MediaConnection)) return new MediaConnection(peer, provider, options);
   EventEmitter.call(this);
-
+console.log(options);
   this.options = util.extend({}, options);
 
   this.open = false;
