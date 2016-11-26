@@ -32,7 +32,11 @@ function pageReady() {
     }
 
     findBusStop(function(response){
+        console.log(response);
         if(response.uuid && response.sdp && response.data){
+            console.log('trying to start a connection');
+            console.log(response.sdp);
+            console.log(response.data);
             // Start connection
             peerConnection = new RTCPeerConnection(peerConnectionConfig);
             peerConnection.onaddstream = gotRemoteStream;
@@ -47,6 +51,7 @@ function pageReady() {
                 peerConnection.addIceCandidate(new RTCIceCandidate(response.data[i])).catch(errorHandler);
             }
         }else{
+            console.log('waiting for a connection.....');
             peerConnection = new RTCPeerConnection(peerConnectionConfig);
             peerConnection.onicecandidate = gotIceCandidate;
             peerConnection.onaddstream = gotRemoteStream;
