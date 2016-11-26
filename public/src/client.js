@@ -30,3 +30,7 @@ function findBusStop(callback){
 function setInactive(uuid, callback){
     sendDataToMatchmaking('/setStatus', {'uuid':uuid, 'status':'inactive'}, undefined, callback);
 }
+
+function setUnavailable(uuid){
+    getDataFromMatchmaking('/setStatus/'+uuid+'/unavailable', {}, function(response){}, function(response){});
+}
