@@ -13,6 +13,8 @@ peer.on('call', function(call){
   // Answer the call automatically (instead of prompting user) for demo purposes
   setRemotePeerLocation(call.metadata);
   call.answer(window.localStream);
+  clearTimeout(window.mainTimer);
+  window.mainTimer = setTimeout(refresh(), 45000);
   openCall(call);
 });
 peer.on('error', function(err){
@@ -47,6 +49,9 @@ function openCall(call){
 }
 
 function call (id, place) {
+
+  clearTimeout(window.mainTimer);
+  window.mainTimer = setTimeout(refresh(), 45000);
   var call = peer.call(id, window.localStream, {'metadata': place});
   openCall(call);
 }
