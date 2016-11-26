@@ -12,7 +12,7 @@ router.post('/add', function(req, res, next) {
         res.json(result);
     };
 	
-	busStopModule.addBusStop(req.body.uuid, req.body.location, responseFunction);
+	busStopModule.addBusStop(req.body.uuid, req.body.location, req.body.sdp, responseFunction);
 });
 
 router.get('/remove/:uuid', function(req, res, next) {
