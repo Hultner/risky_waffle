@@ -298,7 +298,7 @@ var Negotiator = require('./negotiator');
 function MediaConnection(peer, provider, options) {
   if (!(this instanceof MediaConnection)) return new MediaConnection(peer, provider, options);
   EventEmitter.call(this);
-console.log(options);
+
   this.options = util.extend({}, options);
 
   this.open = false;
@@ -1016,6 +1016,7 @@ Peer.prototype.call = function(peer, stream, options) {
     util.error('To call a peer, you must provide a stream from your browser\'s `getUserMedia`.');
     return;
   }
+console.log(options);
   options = options || {};
   options._stream = stream;
   var call = new MediaConnection(peer, this, options);
