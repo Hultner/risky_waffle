@@ -1,0 +1,7 @@
+#localVideo{
+  display: none;
+}
+
+#debug #localVideo{
+  display: block;
+}
