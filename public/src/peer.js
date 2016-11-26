@@ -1424,8 +1424,8 @@ var RTCPeerConnection = require('./adapter').RTCPeerConnection;
 var util = {
   noop: function() {},
 
-  CLOUD_HOST: 'wafflepeerjs.azurewebsites.net',
-  CLOUD_PORT: 80,
+  CLOUD_HOST: '0.peerjs.com',
+  CLOUD_PORT: 9000,
 
   // Browsers that need chunking:
   chunkedBrowsers: {'Chrome': 1},
